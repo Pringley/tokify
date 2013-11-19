@@ -1,0 +1,11 @@
+# Python
+__pycache__
+*.egg-info
+*.pyc
+
+# OS X
+.DS_Store
+
+# Vim
+.*.swp
+*~
