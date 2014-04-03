@@ -10,6 +10,7 @@ different stream.
 >>> import tokify
 >>> x = tokify.int()
 >>> a, b = tokify.floats(2)
+>>> strlist = tokify.strs(3)
 ```
 
 ## Install

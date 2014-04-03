@@ -1,3 +1,15 @@
+"""Read whitespace-separated tokens from a stream.
+
+By default, Tokifier reads from standard input (or a file specified by
+argv[1]). Alternatively, pass the constructer a file object to read from a
+different stream.
+
+>>> import tokify
+>>> x = tokify.int()
+>>> a, b = tokify.floats(2)
+>>> strlist = tokify.strs(3)
+
+"""
 from sys import stdin
 from itertools import islice
 from contextlib import closing
