@@ -12,7 +12,7 @@ class Tokifier:
     >>> import tokify
     >>> tokens = tokify.Tokifier()
     >>> x = tokens.int()
-    >>> a, b = tokens.float(2)
+    >>> a, b = tokens.floats(2)
 
     """
 
@@ -20,22 +20,29 @@ class Tokifier:
         raw_stream = stream or stdin
         self.token_stream = self._token_stream(raw_stream)
 
-    def str(self, amount=1):
-        """Read string token(s)."""
-        return self.token(amount=amount, convert_func=str)
+    def str(self):
+        """Read string token."""
+        return next(self.token_stream)
 
-    def float(self, amount=1):
-        """Read float token(s)."""
-        return self.token(amount=amount, convert_func=float)
+    def strs(self, amount):
+        """Read string tokens."""
+        return [self.str() for _ in range(amount)]
 
-    def int(self, amount=1):
-        """Read int token(s)."""
-        return self.token(amount=amount, convert_func=int)
+    def int(self):
+        """Read int token."""
+        return int(self.str())
 
-    def token(self, amount=1, convert_func=str):
-        """Read token(s), then apply convert_func."""
-        tokens = tuple(map(convert_func, islice(self.token_stream, amount)))
-        return tokens[0] if amount == 1 else tokens
+    def ints(self, amount):
+        """Read int tokens."""
+        return [int(tok) for tok in self.strs(amount)]
+
+    def float(self):
+        """Read float token."""
+        return float(self.str())
+
+    def floats(self, amount):
+        """Read float tokens."""
+        return [float(tok) for tok in self.strs(amount)]
 
     def _token_stream(self, stream):
         # Create a token generator from the stream.

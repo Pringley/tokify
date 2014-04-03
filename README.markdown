@@ -10,7 +10,7 @@ different stream.
 >>> import tokify
 >>> tokens = tokify.Tokifier()
 >>> x = tokens.int()
->>> a, b = tokens.float(2)
+>>> a, b = tokens.floats(2)
 ```
 
 ## Install
