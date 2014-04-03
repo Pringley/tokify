@@ -8,9 +8,8 @@ different stream.
 
 ```python
 >>> import tokify
->>> tokens = tokify.Tokifier()
->>> x = tokens.int()
->>> a, b = tokens.floats(2)
+>>> x = tokify.int()
+>>> a, b = tokify.floats(2)
 ```
 
 ## Install

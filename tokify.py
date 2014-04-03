@@ -2,6 +2,11 @@ from sys import stdin
 from itertools import islice
 from contextlib import closing
 
+# We are overwriting these functions in the module namespace, but we need to
+# use them. This saves them under different names.
+int_convert = int
+float_convert = float
+
 class Tokifier:
     """Read whitespace-separated tokens from a stream.
 
@@ -30,19 +35,19 @@ class Tokifier:
 
     def int(self):
         """Read int token."""
-        return int(self.str())
+        return int_convert(self.str())
 
     def ints(self, amount):
         """Read int tokens."""
-        return [int(tok) for tok in self.strs(amount)]
+        return [int_convert(tok) for tok in self.strs(amount)]
 
     def float(self):
         """Read float token."""
-        return float(self.str())
+        return float_convert(self.str())
 
     def floats(self, amount):
         """Read float tokens."""
-        return [float(tok) for tok in self.strs(amount)]
+        return [float_convert(tok) for tok in self.strs(amount)]
 
     def _token_stream(self, stream):
         # Create a token generator from the stream.
@@ -50,3 +55,30 @@ class Tokifier:
             for line in stream:
                 for token in line.split():
                     yield token
+
+# Default Tokifier
+default = Tokifier()
+
+def str():
+    """Read string token."""
+    return default.str()
+
+def strs(amount):
+    """Read string tokens."""
+    return default.strs(amount)
+
+def int():
+    """Read int token."""
+    return default.int()
+
+def ints(amount):
+    """Read int tokens."""
+    return default.ints(amount)
+
+def float():
+    """Read float token."""
+    return default.float()
+
+def floats(amount):
+    """Read float tokens."""
+    return default.floats(amount)
